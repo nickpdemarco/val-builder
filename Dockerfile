@@ -1,15 +1,15 @@
-FROM ubuntu:20.04
+FROM swift:5.8
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt update -y -q && apt upgrade -y -q
-RUN apt install -y -q \
-    curl \
-    gcc \
-    git \
-    make \
-    patchelf \
-    xz-utils \
-    libgmp-dev
+RUN apt-get update -y -q && apt-get upgrade -y -q
+RUN apt-get install -y -q \
+    libllvm15 \
+    llvm-15 \
+    llvm-15-dev \
+    llvm-15-runtime \
+    zstd
+
+RUN ln -s /usr/bin/llvm-config-15 /usr/bin/llvm-config
 
 COPY build /root
 
